@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/5.3/examples/dashboard/ -->
+<html lang="en" data-bs-theme="light">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>Federated Learning - Defense against Poisoning</title>
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="theme-color" content="#712cf9">
+  <link href="./chart/chart.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="container-fluid  vh-100">
+    <div class="row">
+      <div
+        class="bg-light d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-1 border-bottom">
+        <span class=""><img src="./imgs/png_logo.png" class="header-logo-h" alt=""> </span>
+        <span class="h5 text-center align-bottom my-0">Defense against poisoning in Federated Learning Systems for
+          Autonomous Driving</span>
+        <span class="d-flex justify-content-end">
+          <img src="./imgs/6gsummit-no-bg.png" class="header-logo-h" alt="">
+        </span>
+      </div>
+    </div>
+    <div class="row vh-90">
+
+      <div class="col-8 ms-3">
+        <table class="table  table-sm table-borderless w-100">
+          <tbody class="">
+            <tr class="table-success">
+              <th class="py-2 text-center rounded-top" scope="col" colspan="2">
+                <div class="d-flex">
+                  <span class="text-success text-center flex-grow-1">
+                    Benign Scenario
+                  </span>
+                  <!-- Select Start -->
+                  <div class="chart-select-w">
+                    <div class="input-group input-group-sm">
+                      <div class="input-group-text text-bg-success border-success" id="btnGroupAddon2">Total Users</div>
+                      <select class="form-select text-success border-success fw-bold d-n" aria-label="Total users"
+                        id="totalPeers" onchange="changeSource()">
+                      </select>
+                    </div>
+                  </div>
+                  <!-- Select end -->
+                </div>
+              </th>
+            </tr>
+            <tr class="">
+              <td class="align-middle w-20">
+                <video class="vmh-25 border rounded border-light" loop autoplay muted>
+                  <source src="./vids/benign.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <!-- <img src="./imgs/benign.gif" class="img-thumbnail vmh-25" alt=""> -->
+              </td>
+              <td class="align-middle w-80">
+                <div id="beneignPlot" class="w-100  vh-25"></div>
+              </td>
+            </tr>
+            <tr class="table-danger">
+              <th class="py-2 text-center rounded-top" scope="col" colspan="2">
+
+
+                <div class="d-flex">
+                  <span class="text-danger text-center flex-grow-1">
+                    Poisoned Scenario
+                  </span>
+                  <!-- Select Start -->
+                  <div class="chart-select-w">
+                    <div class="input-group input-group-sm">
+                      <div class="input-group-text text-bg-danger border-danger" id="btnGroupAddon2">Poisoner Precentage
+                      </div>
+                      <select class="form-select text-danger border-danger fw-bold" aria-label="Poisoners"
+                        id="poisoners" onchange="changeSource()">
+                        <!-- <option value="20" selected>20%</option>
+                      <option value="30">30%</option>
+                      <option value="50">50%</option> -->
+                      </select>
+                    </div>
+                  </div>
+                  <!-- Select end -->
+                </div>
+
+              </th>
+
+            </tr>
+            <tr class="">
+              <td class="align-middle w-20">
+                <video class="vmh-25 border rounded border-light" loop autoplay muted>
+                  <source src="./vids/poisoned.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <!-- <img src="./imgs/poisoned.gif" class="img-thumbnail vmh-25" alt=""> -->
+              </td>
+              <td class="align-middle w-80">
+                <div id="poisonedPlot" class="w-100 vh-25"></div>
+              </td>
+            </tr>
+            <tr class="table-primary">
+              <th class="py-2 text-center rounded-top" scope="col" colspan="2">
+
+                <div class="d-flex">
+                  <span class="text-primary text-center flex-grow-1">
+                    Recovered Scenario
+                  </span>
+                  <!-- Select Start -->
+                  <div class="chart-select-w"></div>
+                  <!-- Select end -->
+                </div>
+
+
+              </th>
+            </tr>
+            <tr class="">
+              <td class="align-middle w-20">
+                <video class="vmh-25 border rounded border-light" loop autoplay muted>
+                  <source src="./vids/recovered.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </td>
+              <td class="align-middle w-80">
+                <div id="recoveredPlot" class="w-100 vh-25"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col d-inline-block h-100">
+
+
+        <div class="d-flex align-items-start flex-column h-100">
+          <div class="w-100">
+            <div class="card mb-1">
+              <div class="card-body p-2">
+                <p class="card-title"> <img src="./bootstrap-icons/question-circle.svg" class="d-inline-block ico px-1">
+                  Background</p>
+                <div class="card-text"> <small>
+                    Autonomous driving is a prominent 6G use case that will benefit from ultra-low latency and
+                    high-reliability communication. Many autonomous driving tasks <span class="fw-bold">(Image
+                      classification, Object detection and Semantic Segmentation)</span> are conducted using Artificial
+                    Intelligence and Machine Learning. Massive amounts of data generated by vehicles also serve as an
+                    invaluable source for learning algorithms. There is strong motivation for protecting sensitive data
+                    given the emerging and existing regulation for <span class="fw-bold">privacy protection</span>.
+                    Federated Learning (FL) is a distributed machine learning technique that allows learning from a
+                    large
+                    population while keeping raw data at the source. However, FL could be vulnerbale to poisoning
+                    attacks
+                    that degrade the model performance. Our demonstration explores the question <div
+                      class="fw-bold bg-warning-subtle d-block rounded p-1 text-center m-1">"What if
+                      malicious data from compromised participants is fed to distributed learning systems in autonomous
+                      driving?"</div>
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-1">
+              <div class="card-body p-2">
+                <p class="card-title"> <img src="./bootstrap-icons/wrench.svg" class="d-inline-block ico px-1">
+                  Implementation</p>
+                <small>
+                  <div class="card-text mb-1">
+                    We implement a <span class="fw-bold">traffic-sign recognition</span> system using Federated Learning
+                    using <span class="fw-bold">Convolutional Neural Networks (CNN)</span>. CNNs are capable of learning
+                    patterns regardless of their placement in training image samples, making it a favored approach in
+                    image-based classification operations.
+                    We use the autonomous driving dataset <a class="link-secondary"
+                      href="https://benchmark.ini.rub.de/">
+                      German Traffic Sign Recognition Benchmark (GTSRB) </a> for the training. The charts displayed in
+                    the
+                    dashboard present the following three scenarios.
+
+                    <ol class="list-group m-0 mt-1">
+                      <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="m-0 me-auto">
+                          <span class="fw-bold me-2">Benign Scenario:</span>
+                          Participants with different traffic-sign datasets train their own CNN and share the trained
+                          weights with the central server. Central server updates the model using provided weights and
+                          broadcasts it to all participants.
+                        </div>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="m-0 me-auto">
+                          <span class="fw-bold me-2">Poisoned Scenario:</span>
+                          We define the precentage of malicious paritcipants, and simulate them conducting a label
+                          flipping attack on the system. The selected participants flip the labels for a specific class
+                          such that it is trained to be incorrectly classified as another. They share the poisoned
+                          weights
+                          alongside honest participants. Central server aggergates the poisoned weights, causing the
+                          performance to degrade over training iterations. We choose a subset of road signs as training classes.
+
+                          <div class="d-block text-center my-1 w-100">
+                            <table class="table table-borderless table-sm w-75 mx-auto">
+                              <tbody>
+                                <!-- <tr class="text-center border-bottom">
+                                  <td class="align-middle" rowspan="2">We choose a subset of road signs as training classes</td> 
+                                  <td class="align-middle">0 : </td>
+                                  <td class="align-middle">1 : </td>
+                                  <td class="align-middle">2 : </td>
+                                  <td class="align-middle">3 : </td>
+                                  <td class="align-middle">4 : </td>
+                                  <td class="align-middle">5 : </td>
+                                </tr> -->
+                                <tr>
+                                  <td class="align-middle">0 : </td>
+                                  <td class="align-middle  border-end"><img src="./imgs/Meta/9.png" class="meta-ico"></td>
+                                  <td class="align-middle">1 : </td>
+                                  <td class="align-middle  border-end"><img src="./imgs/Meta/12.png" class="meta-ico"></td>
+                                  <td class="align-middle">2 : </td>
+                                  <td class="align-middle  border-end"><img src="./imgs/Meta/13.png" class="meta-ico"></td>
+                                  <td class="align-middle">3 : </td>
+                                  <td class="align-middle  border-end"><img src="./imgs/Meta/17.png" class="meta-ico"></td>
+                                  <td class="align-middle">4 : </td>
+                                  <td class="align-middle  border-end"><img src="./imgs/Meta/25.png" class="meta-ico"></td>
+                                  <td class="align-middle">5 : </td>
+                                  <td class="align-middle"><img src="./imgs/Meta/38.png" class="meta-ico"></td>
+                                </tr>
+                                <!-- 9: 0, 12: 1, 13: 2, 17: 3, 25: 4, 38: 5 -->
+                              </tbody>
+                            </table>
+                          </div>
+
+                          <div class="d-block my-1 bg-danger-subtle rounded text-center p-1 w-100">
+                            <table class="w-75 mx-auto">
+                              <tbody>
+                                <tr>
+                                  <td class="align-middle">We conduct the following label flipping attack.</td>
+                                  <td class="align-middle"><img src="./imgs/Meta/13.png" class="meta-ico ms-3"></td>
+                                  <td class="align-middle"><img src="../bootstrap-icons/arrow-right.svg" class="ico"
+                                      alt=""></td>
+                                  <td class="align-middle"><img src="./imgs/Meta/25.png" class="meta-ico me-3"></td>
+                                  <td class="align-middle text-muted">(Class 2 to Class 4)</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="m-0 me-auto">
+                          <span class="fw-bold me-2">Recovered Scenario:</span>
+                          We implement <span class="fw-bold">FoolsGold</span> algorithm at the central server. The
+                          defense
+                          algorithm compares the received model characteristics from the distributed set of cars,
+                          perform
+                          a similarity measurement, identify the malicious nature of a model update, and assign a lower
+                          weight for potentially poisoned models.
+                        </div>
+                      </li>
+                    </ol>
+                  </div>
+                </small>
+              </div>
+            </div>
+            <div class="card mb-1">
+              <div class="card-body p-2">
+                <p class="card-title"> <img src="./bootstrap-icons/shield-check.svg" class="d-inline-block ico px-1">
+                  Outcome
+                </p>
+                <div class="card-text"> <small>
+                    <p class="mb-2">
+                      We observe that the defense mechanism is capable of recovering the accuracy loss by continuously
+                      removing the poisoning
+                      effects at the training phase. We also see that it scales considerably when the portion of poisoners present in the system grows higher.
+                      Therefore, introducing a defense mechanism against poisoning attacks will add safety to the
+                      learning processes and make sure the system learns accurately. Such systems will prevent
+                      situations like collisions among vehicles due to improper object classification, where the
+                      outcomes could be catastrophic.
+                    </p>
+                    <div class="d-block bg-success-subtle text-success rounded text-center p-2 fw-bold">
+                      Our demonstration indicates that it is imperative that Artificial Intelligence and Machine
+                      Learning for Autonomous Driving in 6G era utilize novel defense algorithms to defend against
+                      poisoning attacks.
+                    </div>
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-auto py-1 w-100">
+            <div class="d-flex align-items-end justify-content-end w-100">
+              <img src="./imgs/NetSEC_logo_color_rgb.png" class="d-inline-block footer-logo-h" alt="">
+              <img src="./imgs/6G-Cure-logo-rgb-color.png" class="d-inline-block footer-logo-h" alt="">
+            </div>
+          </div>
+          <div class="py-1 w-100 text-end"><small>
+              <span class="fw-bold">Authors:</span>
+              J. Kehelwala, Y. Siriwardhana, T. Hewa, M. Ylianttila.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="./chart/plotly-latest.min.js"></script>
+  <script src="./chart/data_content.js"></script>
+  <script src="./chart/chartdata.js"></script>
+
+</body>
+
+</html>
